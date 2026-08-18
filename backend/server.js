@@ -241,7 +241,7 @@ app.post('/api/chat', async (req, res) => {
     if (!process.env.GEMINI_API_KEY) return res.json({ reply: fallback(), generatedBy: 'Smart recommendation engine' });
 
     const prompt = `You are WeatherIQ, a friendly weather assistant. Answer the user's question using ONLY the supplied current weather and forecast data. Be concise (2-5 sentences or short bullets), natural, and useful. Never invent weather values. If the user asks something unrelated to weather, politely say you are focused on weather. Mention the city when useful.\n\nCITY WEATHER DATA:\n${JSON.stringify(weather)}\n\nUSER QUESTION:\n${question}`;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent`;
     const response = await axios.post(url,
       { contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0.4 } },
       { timeout: 15000, headers: { 'x-goog-api-key': process.env.GEMINI_API_KEY } }
