@@ -39,7 +39,7 @@ function App() {
     
     setLoading(true); setError('');
     try {
-      const response = await fetch(`/api/weather?city=${encodeURIComponent(value)}`);
+      const response = await fetch(`https://weather-intelligence-platform-o4x5.onrender.com/api/weather?city=${encodeURIComponent(value)}`);
       const body = await response.json();
       if (!response.ok) throw new Error(body.message || 'Could not load weather.');
       cacheRef.current[value] = body;
@@ -72,7 +72,7 @@ function App() {
     setChatInput('');
     setChatSending(true);
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://weather-intelligence-platform-o4x5.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: text, weather: data })
